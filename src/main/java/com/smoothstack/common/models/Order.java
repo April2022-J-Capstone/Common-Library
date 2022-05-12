@@ -1,46 +1,87 @@
 package com.smoothstack.common.models;
 
-import java.time.LocalDateTime;
-
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
-
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-@Entity
-@Table(name = "order")
+import javax.persistence.*;
+import java.time.LocalDateTime;
+import java.util.List;
+
 @Data
-@NoArgsConstructor
 @AllArgsConstructor
+@NoArgsConstructor
+@Entity
+@Table(name = "orders")
 public class Order {
-    
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    @Column(name = "id", nullable = false)
+    private Integer id;
 
-    private String order_status;
+    @Column(name = "order_status", length = 45)
+    private String orderStatus;
 
-    private String restaurant_notes;
+    @Column(name = "restaurant_notes", length = 250)
+    private String restaurantNotes;
 
-    private String driver_notes;
+    @Column(name = "driver_notes", length = 250)
+    private String driverNotes;
 
-    private Double sub_total;
+    @Column(name = "sub_total")
+    private Double subTotal;
 
-    private Double delivery_fee;
+    @Column(name = "delivery_fee")
+    private Double deliveryFee;
 
+    @Column(name = "tax")
     private Double tax;
 
+    @Column(name = "tip")
     private Double tip;
 
+    @Column(name = "total")
     private Double total;
 
-    private LocalDateTime time_created;
+    @Column(name = "time_created")
+    private LocalDateTime timeCreated;
 
-    private LocalDateTime scheduled_for;
+    @Column(name = "scheduled_for")
+    private LocalDateTime scheduledFor;
 
+    @Column(name = "net_loyalty")
+    private Integer netLoyalty;
+
+    @ManyToMany
+    @JoinTable(name = "payment",
+            joinColumns = @JoinColumn(name = "order_id"),
+            inverseJoinColumns = @JoinColumn(name = "payment_id"))
+    private List<Card> cards;
+
+    @ManyToOne
+    @JoinTable(name = "order_driver",
+            joinColumns = @JoinColumn(name = "order_id"),
+            inverseJoinColumns = @JoinColumn(name = "driver_id"))
+    private User driver;
+
+    @ManyToMany
+    @JoinTable(name = "order_restaurant",
+            joinColumns = @JoinColumn(name = "order_id"),
+            inverseJoinColumns = @JoinColumn(name = "restaurant_id"))
+    private List<Restaurant> restaurants;
+
+    @ManyToMany
+    @JoinTable(name = "order_discount",
+            joinColumns = @JoinColumn(name = "order_id"),
+            inverseJoinColumns = @JoinColumn(name = "discount_id"))
+    private List<Discount> discounts;
+
+    @ManyToOne
+    @JoinTable(name = "customer_order",
+            joinColumns = @JoinColumn(name = "order_id"),
+            inverseJoinColumns = @JoinColumn(name = "customer_id"))
+    private User customer;
+
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "order")
+    private List<OrderItem> orderItems;
 }

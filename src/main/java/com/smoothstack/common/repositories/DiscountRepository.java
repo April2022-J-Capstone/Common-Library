@@ -1,9 +1,9 @@
 package com.smoothstack.common.repositories;
 
-import com.smoothstack.common.models.Order;
+import com.smoothstack.common.models.Discount;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface OrderRepository extends JpaRepository<Order, Integer> {
+public interface DiscountRepository extends JpaRepository<Discount, Integer> {
 }
