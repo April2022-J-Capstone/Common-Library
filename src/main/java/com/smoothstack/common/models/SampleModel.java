@@ -1,4 +1,4 @@
-package com.smoothstack.models;
+package com.smoothstack.common.models;
 
 import javax.persistence.*;
 

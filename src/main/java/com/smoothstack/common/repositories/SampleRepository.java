@@ -1,6 +1,6 @@
-package com.smoothstack.repositories;
+package com.smoothstack.common.repositories;
 
-import com.smoothstack.models.SampleModel;
+import com.smoothstack.common.models.SampleModel;
 import org.springframework.data.repository.CrudRepository;
 
 public interface SampleRepository extends CrudRepository<SampleModel, Integer> {
