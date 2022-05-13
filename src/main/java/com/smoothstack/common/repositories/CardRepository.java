@@ -1,9 +1,9 @@
 package com.smoothstack.common.repositories;
 
-import com.smoothstack.common.models.Order;
+import com.smoothstack.common.models.Card;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface OrderRepository extends JpaRepository<Order, Integer> {
+public interface CardRepository extends JpaRepository<Card, Integer> {
 }
