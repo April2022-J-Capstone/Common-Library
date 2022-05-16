@@ -17,7 +17,7 @@ public class UserInformation {
     private Integer id;
 
     @MapsId
-    @OneToOne
+    @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "users_id")
     private User user;
 
@@ -38,4 +38,7 @@ public class UserInformation {
 
     @Column(name = "veteran_status")
     private Boolean veteranStatus;
+
+    @Column(name = "email_confirmed")
+    private Boolean emailConfirmed;
 }

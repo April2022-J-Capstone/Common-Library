@@ -19,4 +19,8 @@ public class CommunicationMethod {
 
     @Column(name = "name", length = 45)
     private String name;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "users_id", nullable = false)
+    private User user;
 }
