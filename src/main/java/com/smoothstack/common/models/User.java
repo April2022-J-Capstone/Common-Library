@@ -30,10 +30,12 @@ public class User {
             inverseJoinColumns = @JoinColumn(name = "role_id"))
     private List<UserRole> userRoles;
 
-    @OneToOne(fetch = FetchType.LAZY, mappedBy = "user")
+    @OneToOne(fetch = FetchType.LAZY)
     private UserInformation userInformation;
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "user")
+    @OneToMany(fetch = FetchType.LAZY)
+    @JoinTable(name = "communication_method",
+            joinColumns = @JoinColumn(name = "users_id"))
     private List<CommunicationMethod> communicationMethods;
 
     @OneToMany

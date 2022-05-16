@@ -17,7 +17,7 @@ public class UserInformation {
     private Integer id;
 
     @MapsId
-    @OneToOne(fetch = FetchType.LAZY, mappedBy= "user_information")
+    @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "users_id")
     private User user;
 
