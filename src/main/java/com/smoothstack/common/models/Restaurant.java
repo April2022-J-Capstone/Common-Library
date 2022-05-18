@@ -35,7 +35,7 @@ public class Restaurant {
             inverseJoinColumns = @JoinColumn(name = "review_id"))
     private List<Review> reviews;
 
-    @OneToMany(mappedBy = "restaurants")
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "restaurants")
     private List<MenuItem> menuItems;
 
     @ManyToMany
