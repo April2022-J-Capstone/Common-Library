@@ -1,0 +1,83 @@
+package com.smoothstack.common;
+
+import com.smoothstack.common.models.User;
+import com.smoothstack.common.repositories.*;
+import com.smoothstack.common.services.CommonLibraryTestingService;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.context.annotation.PropertySource;
+
+import javax.transaction.Transactional;
+import java.util.Optional;
+
+@PropertySource("persistence-generic-entity.properties")
+@Transactional
+@SpringBootTest
+public class CommonLibraryTestingServiceTest {
+
+    @Autowired
+    CommonLibraryTestingService commonLibraryTestingService;
+
+    //Common Library Repositories
+    @Autowired
+    ActiveDriverRepository activeDriverRepository;
+    @Autowired
+    CardRepository cardRepository;
+    @Autowired
+    CommunicationMethodRepository communicationMethodRepository;
+    @Autowired
+    DiscountRepository discountRepository;
+    @Autowired
+    LocationRepository locationRepository;
+    @Autowired
+    MenuItemRepository menuItemRepository;
+    @Autowired
+    MessageRepository messageRepository;
+    @Autowired
+    MessageTypeRepository messageTypeRepository;
+    @Autowired
+    OrderItemRepository orderItemRepository;
+    @Autowired
+    OrderRepository orderRepository;
+    @Autowired
+    RestaurantRepository restaurantRepository;
+    @Autowired
+    RestaurantTagRepository restaurantTagRepository;
+    @Autowired
+    ReviewRepository reviewRepository;
+    @Autowired
+    UserInformationRepository userInformationRepository;
+    @Autowired
+    UserRepository userRepository;
+    @Autowired
+    UserRoleRepository userRoleRepository;
+
+    @BeforeEach
+    void setup() {
+        commonLibraryTestingService.createTestData();
+    }
+
+    @Test
+    void testUserData() {
+        Optional<User> testAdmin = userRepository.findTopByUserName("testAdmin");
+        assert(testAdmin.isPresent());
+        assert(!testAdmin.get().getUserRoles().isEmpty());
+
+        Optional<User> testDriver = userRepository.findTopByUserName("testDriver");
+        assert(testDriver.isPresent());
+        assert(!testDriver.get().getUserRoles().isEmpty());
+
+        Optional<User> testCustomer = userRepository.findTopByUserName("testCustomer");
+        assert(testCustomer.isPresent());
+
+    }
+
+    @Test
+    void testUserRoleData() {
+        assert(userRoleRepository.findTopByRoleName("Test-Admin").isPresent());
+        assert(userRoleRepository.findTopByRoleName("Test-Driver").isPresent());
+    }
+}
