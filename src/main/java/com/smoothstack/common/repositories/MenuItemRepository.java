@@ -1,6 +1,7 @@
 package com.smoothstack.common.repositories;
 
 import java.util.List;
+import java.util.Optional;
 
 import com.smoothstack.common.models.MenuItem;
 import com.smoothstack.common.models.Restaurant;
@@ -10,4 +11,6 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface MenuItemRepository extends JpaRepository<MenuItem, Integer> {
     List<MenuItem> findAllByRestaurants(Restaurant restaurants);
+    // Useful only for testing as there can be multiple menu items under the same name
+    Optional<MenuItem> findTopByName(String name);
 }

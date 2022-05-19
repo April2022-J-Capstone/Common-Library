@@ -8,12 +8,10 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.context.annotation.PropertySource;
 
 import javax.transaction.Transactional;
 import java.util.Optional;
 
-@PropertySource("persistence-generic-entity.properties")
 @Transactional
 @SpringBootTest
 public class CommonLibraryTestingServiceTest {
@@ -77,7 +75,7 @@ public class CommonLibraryTestingServiceTest {
 
     @Test
     void testUserRoleData() {
-        assert(userRoleRepository.findTopByRoleName("Test-Admin").isPresent());
-        assert(userRoleRepository.findTopByRoleName("Test-Driver").isPresent());
+        assert(userRoleRepository.findTopByRoleName("admin").isPresent());
+        assert(userRoleRepository.findTopByRoleName("driver").isPresent());
     }
 }

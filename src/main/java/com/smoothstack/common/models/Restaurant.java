@@ -1,13 +1,13 @@
 package com.smoothstack.common.models;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
-@Data
+@Getter
+@Setter
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
@@ -43,4 +43,11 @@ public class Restaurant {
             joinColumns = @JoinColumn(name = "restaurants_id"),
             inverseJoinColumns = @JoinColumn(name = "restaurant_tag_id"))
     private List<RestaurantTag> restaurantTags;
+
+    public void addTag(RestaurantTag restaurantTag) {
+        if (restaurantTags == null)
+            restaurantTags = new ArrayList<>();
+
+        restaurantTags.add(restaurantTag);
+    }
 }

@@ -17,6 +17,13 @@ password  varchar(45),
 primary key(id)
 );
 
+create table if not exists `capstone`.`communication_method`
+(
+id                        int auto_increment,
+name                      varchar(45),
+primary key(id)
+);
+
 create table if not exists `capstone`.`user_information`
 (
 users_id        int,
@@ -24,11 +31,13 @@ first_name      varchar(45),
 last_name       varchar(45),
 email           varchar(45),
 phone_number    varchar(45),
-age             int,
+birthdate		date,
 veteran_status  boolean,
 email_confirmed boolean,
+communication_type_id int,
 primary key (users_id),
-foreign key (users_id) references `capstone`.`users` (id)
+foreign key (users_id) references `capstone`.`users` (id),
+foreign key (communication_type_id) references `capstone`.`communication_method`(id)
 );
 
 create table if not exists `capstone`.`orders`
@@ -51,6 +60,7 @@ primary key (id)
 create table if not exists `capstone`.`card`
 (
 id               int auto_increment,
+name 			 varchar(45),
 card_holder_name varchar(45),
 card_expiration  date,
 card_security    varchar(45),
@@ -87,7 +97,7 @@ name varchar(45),
 primary key (id)
 );
 
-create table if not exists `capstone`.`restauraunt_tag`
+create table if not exists `capstone`.`restaurant_tag`
 (
 id   int auto_increment,
 name varchar(45),
@@ -138,15 +148,6 @@ foreign key (menu_items_id) references `capstone`.`menu_items` (id),
 foreign key (id) references `capstone`.`orders` (id)
 );
 
-create table if not exists `capstone`.`communication_method`
-(
-id                        int auto_increment,
-name                      varchar(45),
-users_id                  int,
-primary key(id),
-foreign key (users_id) references `capstone`.`users` (id)
-);
-
 create table if not exists `capstone`.`message`
 (
 id                    int auto_increment,
@@ -165,7 +166,7 @@ create table if not exists `capstone`.`assigned_tags`
 restaurants_id    int not null,
 restaurant_tag_id int not null,
 primary key (restaurants_id, restaurant_tag_id),
-foreign key (restaurant_tag_id) references `capstone`.`restauraunt_tag` (id),
+foreign key (restaurant_tag_id) references `capstone`.`restaurant_tag` (id),
 foreign key (restaurants_id) references `capstone`.`restaurants` (id)
 );
 
@@ -190,9 +191,9 @@ foreign key (restaurant_id) references `capstone`.`restaurants` (id)
 create table if not exists `capstone`.`restaurant_review`
 (
 review_id      int not null,
-restauraunt_id int not null,
-primary key (review_id, restauraunt_id),
-foreign key (restauraunt_id) references `capstone`.`restaurants` (id),
+restaurant_id int not null,
+primary key (review_id, restaurant_id),
+foreign key (restaurant_id) references `capstone`.`restaurants` (id),
 foreign key (review_id) references `capstone`.`reviews` (id)
 );
 
@@ -271,8 +272,8 @@ foreign key (user_id) references `capstone`.`users` (id)
 create table if not exists `capstone`.`saved_locations`
 (
 location_id int not null,
-users_id    int not null,
-primary key (location_id, users_id),
+user_id    int not null,
+primary key (location_id, user_id),
 foreign key (location_id) references `capstone`.`location` (id),
-foreign key (users_id) references `capstone`.`users` (id)
+foreign key (user_id) references `capstone`.`users` (id)
 );

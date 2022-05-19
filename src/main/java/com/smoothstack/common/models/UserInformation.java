@@ -1,12 +1,12 @@
 package com.smoothstack.common.models;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
+import java.sql.Date;
 
-@Data
+@Getter
+@Setter
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
@@ -33,12 +33,16 @@ public class UserInformation {
     @Column(name = "phone_number", length = 45)
     private String phoneNumber;
 
-    @Column(name = "age")
-    private Integer age;
+    @Column(name = "birthdate")
+    private Date birthdate;
 
     @Column(name = "veteran_status")
     private Boolean veteranStatus;
 
     @Column(name = "email_confirmed")
     private Boolean emailConfirmed;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "communication_type_id")
+    private CommunicationMethod communicationType;
 }

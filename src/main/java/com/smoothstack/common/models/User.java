@@ -1,13 +1,12 @@
 package com.smoothstack.common.models;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
-import java.util.List;
+import java.util.*;
 
-@Data
+@Getter
+@Setter
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
@@ -33,11 +32,6 @@ public class User {
     @OneToOne(fetch = FetchType.LAZY)
     private UserInformation userInformation;
 
-    @OneToMany(fetch = FetchType.LAZY)
-    @JoinTable(name = "communication_method",
-            joinColumns = @JoinColumn(name = "users_id"))
-    private List<CommunicationMethod> communicationMethods;
-
     @OneToMany
     @JoinTable(name = "driver_review",
             joinColumns = @JoinColumn(name = "driver_id"),
@@ -55,4 +49,11 @@ public class User {
             joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "location_id"))
     private List<Location> savedLocations;
+
+    public void addRole(UserRole toAdd) {
+        if (userRoles == null)
+            userRoles = new ArrayList<>();
+
+        userRoles.add(toAdd);
+    }
 }
