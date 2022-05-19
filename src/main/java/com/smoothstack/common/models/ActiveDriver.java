@@ -17,7 +17,7 @@ public class ActiveDriver {
     private Integer id;
 
     @MapsId
-    @OneToOne(fetch = FetchType.LAZY, optional = false)
+    @OneToOne(optional = false)
     @JoinColumn(name = "user_id", nullable = false)
     private User users;
 

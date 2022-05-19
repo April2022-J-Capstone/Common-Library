@@ -82,7 +82,7 @@ public class Order {
             inverseJoinColumns = @JoinColumn(name = "customer_id"))
     private User customer;
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "order")
+    @OneToMany(mappedBy = "order", cascade = CascadeType.ALL)
     private List<OrderItem> orderItems;
 
     public void addRestaurant(Restaurant restaurant) {

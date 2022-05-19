@@ -58,6 +58,7 @@ public class CommonLibraryTestingServiceTest {
     }
 
     @Test
+    @Transactional
     void testUserData() {
         Optional<User> testAdmin = userRepository.findTopByUserName("testAdmin");
         assert(testAdmin.isPresent());
