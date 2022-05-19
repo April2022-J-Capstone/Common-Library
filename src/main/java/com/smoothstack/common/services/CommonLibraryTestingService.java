@@ -14,12 +14,14 @@ import org.aspectj.weaver.ast.Or;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.sql.Date;
 import java.time.Instant;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+@Transactional
 @Service
 public class CommonLibraryTestingService {
     //Common Library Repositories
@@ -448,7 +450,8 @@ public class CommonLibraryTestingService {
         testAdmin.setUserName("testAdmin");
         testAdmin.setPassword("testAdmin");
         testAdmin.addRole(testAdminRole);
-        testAdmin = userRepository.saveAndFlush(testAdmin);
+
+        testAdmin = userRepository.save(testAdmin);
 
         UserInformation userInformation = new UserInformation();
         userInformation.setUser(testAdmin);
@@ -459,7 +462,8 @@ public class CommonLibraryTestingService {
         userInformation.setBirthdate(Date.valueOf("2000-04-01"));
         userInformation.setVeteranStatus(false);
         userInformation.setEmailConfirmed(true);
-        userInformationRepository.saveAndFlush(userInformation);
+
+        userInformation = userInformationRepository.save(userInformation);
 
         //Test Driver User
 

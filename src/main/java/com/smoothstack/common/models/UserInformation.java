@@ -13,11 +13,11 @@ import java.sql.Date;
 @Table(name = "user_information")
 public class UserInformation {
     @Id
-    @Column(name = "users_id", nullable = false)
+    @Column(name = "users_id")
     private Integer id;
 
-    @MapsId
     @OneToOne(fetch = FetchType.LAZY)
+    @MapsId
     @JoinColumn(name = "users_id")
     private User user;
 

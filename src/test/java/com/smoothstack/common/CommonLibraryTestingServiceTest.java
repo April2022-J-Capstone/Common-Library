@@ -12,7 +12,6 @@ import org.springframework.boot.test.context.SpringBootTest;
 import javax.transaction.Transactional;
 import java.util.Optional;
 
-@Transactional
 @SpringBootTest
 public class CommonLibraryTestingServiceTest {
 
@@ -63,10 +62,14 @@ public class CommonLibraryTestingServiceTest {
         Optional<User> testAdmin = userRepository.findTopByUserName("testAdmin");
         assert(testAdmin.isPresent());
         assert(!testAdmin.get().getUserRoles().isEmpty());
+        assert(testAdmin.get().getUserInformation() != null);
+        System.out.println(testAdmin.get().getUserInformation().getFirstName());
 
         Optional<User> testDriver = userRepository.findTopByUserName("testDriver");
         assert(testDriver.isPresent());
         assert(!testDriver.get().getUserRoles().isEmpty());
+        assert(testDriver.get().getUserInformation() != null);
+        System.out.println(testDriver.get().getUserInformation().getFirstName());
 
         Optional<User> testCustomer = userRepository.findTopByUserName("testCustomer");
         assert(testCustomer.isPresent());
