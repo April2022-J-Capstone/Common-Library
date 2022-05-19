@@ -1,14 +1,14 @@
 package com.smoothstack.common.models;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
-@Data
+@Getter
+@Setter
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
@@ -84,4 +84,10 @@ public class Order {
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "order")
     private List<OrderItem> orderItems;
+
+    public void addRestaurant(Restaurant restaurant) {
+        if (restaurants == null)
+            restaurants = new ArrayList<>();
+        restaurants.add(restaurant);
+    }
 }

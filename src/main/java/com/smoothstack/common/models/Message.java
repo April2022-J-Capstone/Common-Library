@@ -1,13 +1,12 @@
 package com.smoothstack.common.models;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 import java.time.Instant;
 
-@Data
+@Getter
+@Setter
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
@@ -29,7 +28,6 @@ public class Message {
     @Column(name = "is_active")
     private Boolean isActive;
 
-    @Convert(disableConversion = true)
     @Column(name = "time_sent")
     private Instant timeSent;
 
