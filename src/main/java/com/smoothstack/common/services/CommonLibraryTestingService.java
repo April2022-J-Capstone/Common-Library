@@ -451,7 +451,7 @@ public class CommonLibraryTestingService {
         testAdmin.setPassword("testAdmin");
         testAdmin.addRole(testAdminRole);
 
-        testAdmin = userRepository.save(testAdmin);
+        
 
         UserInformation userInformation = new UserInformation();
         userInformation.setUser(testAdmin);
@@ -463,7 +463,10 @@ public class CommonLibraryTestingService {
         userInformation.setVeteranStatus(false);
         userInformation.setEmailConfirmed(true);
 
-        userInformation = userInformationRepository.save(userInformation);
+        System.out.println("Saving Admin User");
+        testAdmin.setUserInformation(userInformation);
+        testAdmin = userRepository.save(testAdmin);
+        //userInformation = userInformationRepository.save(userInformation);
 
         //Test Driver User
 
@@ -471,7 +474,7 @@ public class CommonLibraryTestingService {
         testDriver.setUserName("testDriver");
         testDriver.setPassword("testDriver");
         testDriver.addRole(testDriverRole);
-        testDriver = userRepository.saveAndFlush(testDriver);
+        
 
         userInformation = new UserInformation();
         userInformation.setUser(testDriver);
@@ -482,7 +485,11 @@ public class CommonLibraryTestingService {
         userInformation.setBirthdate(Date.valueOf("1950-04-20"));
         userInformation.setVeteranStatus(true);
         userInformation.setEmailConfirmed(true);
-        userInformationRepository.saveAndFlush(userInformation);
+
+        System.out.println("Saving Driver User");
+        testDriver.setUserInformation(userInformation);
+        testDriver = userRepository.saveAndFlush(testDriver);
+        //userInformationRepository.saveAndFlush(userInformation);
 
         ActiveDriver testActiveDriver = new ActiveDriver();
         testActiveDriver.setUsers(testDriver);
@@ -494,7 +501,7 @@ public class CommonLibraryTestingService {
         User testCustomer = new User();
         testCustomer.setUserName("testCustomer");
         testCustomer.setPassword("testCustomer");
-        testCustomer = userRepository.saveAndFlush(testCustomer);
+        
 
         userInformation = new UserInformation();
         userInformation.setUser(testCustomer);
@@ -505,14 +512,17 @@ public class CommonLibraryTestingService {
         userInformation.setBirthdate(Date.valueOf("2000-01-01"));
         userInformation.setVeteranStatus(false);
         userInformation.setEmailConfirmed(true);
-        userInformationRepository.saveAndFlush(userInformation);
+
+        testCustomer.setUserInformation(userInformation);
+        testCustomer = userRepository.saveAndFlush(testCustomer);
+        //userInformationRepository.saveAndFlush(userInformation);
 
         // Test Unconfirmed User
 
         User unconfirmedTestUser = new User();
         unconfirmedTestUser.setUserName("unconfirmedTestCustomer");
         unconfirmedTestUser.setPassword("unconfirmedTestCustomer");
-        unconfirmedTestUser = userRepository.saveAndFlush(unconfirmedTestUser);
+        
 
         userInformation = new UserInformation();
         userInformation.setUser(unconfirmedTestUser);
@@ -523,7 +533,10 @@ public class CommonLibraryTestingService {
         userInformation.setBirthdate(Date.valueOf("2000-01-01"));
         userInformation.setVeteranStatus(false);
         userInformation.setEmailConfirmed(false);
-        userInformationRepository.saveAndFlush(userInformation);
+
+        unconfirmedTestUser.setUserInformation(userInformation);
+        unconfirmedTestUser = userRepository.saveAndFlush(unconfirmedTestUser);
+        //userInformationRepository.saveAndFlush(userInformation);
 
     }
 }

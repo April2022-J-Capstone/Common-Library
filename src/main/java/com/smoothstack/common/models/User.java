@@ -29,7 +29,7 @@ public class User {
             inverseJoinColumns = @JoinColumn(name = "role_id"))
     private List<UserRole> userRoles;
 
-    @OneToOne(cascade = CascadeType.ALL, mappedBy = "user")
+    @OneToOne(cascade = CascadeType.ALL, mappedBy = "user", optional = false)
     @PrimaryKeyJoinColumn
     private UserInformation userInformation;
 
