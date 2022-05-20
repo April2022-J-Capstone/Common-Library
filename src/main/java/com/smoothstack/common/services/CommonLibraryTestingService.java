@@ -155,7 +155,7 @@ public class CommonLibraryTestingService {
         }
         order1Items.add(order1Item);
 
-        order1Items = orderItemRepository.saveAllAndFlush(order1Items);
+        testOrder1.setOrderItems(order1Items);
 
         double totalPrice = 0;
         for (OrderItem orderItem: order1Items)
@@ -207,7 +207,7 @@ public class CommonLibraryTestingService {
         }
         order2Items.add(order2Item);
 
-        order2Items = orderItemRepository.saveAllAndFlush(order2Items);
+        testOrder2.setOrderItems(order2Items);
 
         totalPrice = 0;
         for (OrderItem orderItem: order2Items)
