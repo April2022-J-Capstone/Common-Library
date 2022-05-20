@@ -117,6 +117,8 @@ public class CommonLibraryTestingService {
 
         Order testOrder1 = new Order();
 
+        testOrder1.setOrderStatus("delivered");
+
         Optional<User> testOrder1Customer = userRepository.findTopByUserName("testCustomer");
         if (testOrder1Customer.isPresent())
             testOrder1.setCustomer(testOrder1Customer.get());
