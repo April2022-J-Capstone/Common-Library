@@ -9,5 +9,4 @@ import java.util.Optional;
 @Repository
 public interface MessageRepository extends JpaRepository<Message, Integer> {
     Optional<Message> findTopByConfirmationCode(String confirmationCode);
-    Message getByConfirmationCode(String confirmationCode);
 }
