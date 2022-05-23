@@ -82,4 +82,11 @@ public class CommonLibraryTestingServiceTest {
         assert(userRoleRepository.findTopByRoleName("admin").isPresent());
         assert(userRoleRepository.findTopByRoleName("driver").isPresent());
     }
+
+    @Test
+    void testMessageType() {
+        assert(messageTypeRepository.findTopByName("user-confirmation").isPresent());
+        assert(messageTypeRepository.findTopByName("forgot-password").isPresent());
+        assert(messageTypeRepository.findTopByName("order-created").isPresent());
+    }
 }
