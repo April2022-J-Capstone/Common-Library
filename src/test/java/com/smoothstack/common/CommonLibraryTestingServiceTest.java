@@ -84,6 +84,14 @@ public class CommonLibraryTestingServiceTest {
     }
 
     @Test
+    void testUserInformationByEmail() {
+        assert(userInformationRepository.findTopByEmail("ben-email").isPresent());
+        assert(userInformationRepository.findTopByEmail("per-email").isPresent());
+        assert(userInformationRepository.findTopByEmail("roxanne-email").isPresent());
+        assert(userInformationRepository.findTopByEmail("marcus-email").isPresent());
+    }
+
+    @Test
     void testMessageType() {
         assert(messageTypeRepository.findTopByName("user-confirmation").isPresent());
         assert(messageTypeRepository.findTopByName("forgot-password").isPresent());
