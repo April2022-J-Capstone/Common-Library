@@ -97,4 +97,9 @@ public class CommonLibraryTestingServiceTest {
         assert(messageTypeRepository.findTopByName("forgot-password").isPresent());
         assert(messageTypeRepository.findTopByName("order-created").isPresent());
     }
+
+    @Test
+    void testMessageByConfirmationCode() {
+        assert(messageRepository.findTopByConfirmationCode("thisIsAnExampleConfirmationCode").isPresent());
+    }
 }

@@ -107,9 +107,6 @@ public class CommonLibraryTestingService {
         userConfirmationMessage.setCommunicationType(email);
         userConfirmationMessage.setConfirmationCode("thisIsAnExampleConfirmationCode");
         messageRepository.save(userConfirmationMessage);
-
-        //TODO ADJUST TO MESSAGE CHANGES
-
     }
 
     private void createOrderTestData() {
