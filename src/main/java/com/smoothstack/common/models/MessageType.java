@@ -1,5 +1,6 @@
 package com.smoothstack.common.models;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.*;
 
 import javax.persistence.*;
@@ -9,6 +10,8 @@ import javax.persistence.*;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
+@Builder
+@JsonInclude(JsonInclude.Include.NON_NULL)
 @Table(name = "message_type")
 public class MessageType {
     @Id

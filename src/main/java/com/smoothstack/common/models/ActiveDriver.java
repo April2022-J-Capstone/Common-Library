@@ -1,5 +1,6 @@
 package com.smoothstack.common.models;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.*;
 
 import javax.persistence.*;
@@ -10,6 +11,8 @@ import java.time.Instant;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
+@Builder
+@JsonInclude(JsonInclude.Include.NON_NULL)
 @Table(name = "active_drivers")
 public class ActiveDriver {
     @Id
