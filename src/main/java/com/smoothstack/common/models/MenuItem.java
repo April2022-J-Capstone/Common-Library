@@ -1,5 +1,6 @@
 package com.smoothstack.common.models;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.*;
 
 import javax.persistence.*;
@@ -10,6 +11,8 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
+@Builder
+@JsonInclude(JsonInclude.Include.NON_NULL)
 @Table(name = "menu_items")
 public class MenuItem {
     @Id
