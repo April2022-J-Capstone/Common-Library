@@ -22,7 +22,6 @@ create table if not exists `capstone`.`communication_method`
 (
 id                        int auto_increment,
 name                      varchar(45),
-enabled boolean default true,
 primary key(id)
 );
 
@@ -100,7 +99,6 @@ create table if not exists `capstone`.`message_type`
 (
 id   int auto_increment,
 name varchar(45),
-enabled boolean default true,
 primary key (id)
 );
 
