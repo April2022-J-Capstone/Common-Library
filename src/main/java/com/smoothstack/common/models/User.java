@@ -26,6 +26,9 @@ public class User {
     @Column(name = "password", length = 45)
     private String password;
 
+    @Column(name = "enabled", columnDefinition = "boolean default true")
+    private boolean enabled;
+
     @ManyToMany()
     @JoinTable(name = "assigned_roles",
             joinColumns = @JoinColumn(name = "users_id"),
