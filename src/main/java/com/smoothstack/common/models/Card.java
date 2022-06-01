@@ -35,6 +35,6 @@ public class Card {
     @Column(name = "card_zip_code", length = 45)
     private String cardZipCode;
 
-    @Column(name = "enabled", columnDefinition = "boolean default true")
-    private boolean enabled;
+    @Column(name = "enabled")
+    private boolean enabled = true;
 }

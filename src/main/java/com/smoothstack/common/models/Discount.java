@@ -35,6 +35,6 @@ public class Discount {
     @Column(name = "discount_end")
     private LocalDateTime discountEnd;
 
-    @Column(name = "enabled", columnDefinition = "boolean default true")
-    private boolean enabled;
+    @Column(name = "enabled")
+    private boolean enabled = true;
 }

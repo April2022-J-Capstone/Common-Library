@@ -22,6 +22,6 @@ public class RestaurantTag {
     @Column(name = "name", length = 45)
     private String name;
 
-    @Column(name = "enabled", columnDefinition = "boolean default true")
-    private boolean enabled;
+    @Column(name = "enabled")
+    private boolean enabled = true;
 }
