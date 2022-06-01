@@ -14,6 +14,7 @@ create table if not exists `capstone`.`users`
 id        int auto_increment,
 user_name varchar(45),
 password  varchar(45),
+enabled boolean default true,
 primary key(id)
 );
 
@@ -54,6 +55,7 @@ total            float,
 time_created     datetime,
 scheduled_for    datetime,
 net_loyalty		 int,
+enabled boolean default true,
 primary key (id)
 );
 
@@ -65,6 +67,7 @@ card_holder_name varchar(45),
 card_expiration  date,
 card_security    varchar(45),
 card_zip_code    varchar(45),
+enabled boolean default true,
 primary key(id)
 );
 
@@ -76,6 +79,7 @@ amount         float default 0,
 percent        int default 0,
 discount_start datetime,
 discount_end   datetime,
+enabled boolean default true,
 primary key (id)
 );
 
@@ -87,6 +91,7 @@ address       varchar(45),
 city          varchar(45),
 state         varchar(45),
 zip_code      int,
+enabled boolean default true,
 primary key(id)
 );
 
@@ -101,6 +106,7 @@ create table if not exists `capstone`.`restaurant_tag`
 (
 id   int auto_increment,
 name varchar(45),
+enabled boolean default true,
 primary key (id)
 );
 
@@ -110,6 +116,7 @@ id int auto_increment,
 location_id int,
 owner_id int,
 name varchar(45),
+enabled boolean default true,
 primary key (id),
 foreign key (location_id) references `location`(id),
 foreign key (owner_id) references `users`(id)
@@ -122,6 +129,7 @@ restaurants_id int not null,
 name           varchar(45),
 description    varchar(250),
 price          float,
+enabled boolean default true,
 primary key (id),
 foreign key (restaurants_id) references `capstone`.`restaurants` (id)
 );
@@ -132,6 +140,7 @@ id           int auto_increment,
 time_created datetime,
 rating       int,
 message      varchar(250),
+enabled boolean default true,
 primary key (id)
 );
 
@@ -143,6 +152,7 @@ menu_items_id int not null,
 notes         varchar(250),
 discount      float,
 price         float,
+enabled boolean default true,
 primary key (id),
 foreign key (menu_items_id) references `capstone`.`menu_items` (id),
 foreign key (id) references `capstone`.`orders` (id)

@@ -32,6 +32,9 @@ public class Restaurant {
     @Column(name = "name", length = 45)
     private String name;
 
+    @Column(name = "enabled", columnDefinition = "boolean default true")
+    private boolean enabled;
+
     @OneToMany
     @JoinTable(name = "restaurant_review",
             joinColumns = @JoinColumn(name = "restaurant_id"),

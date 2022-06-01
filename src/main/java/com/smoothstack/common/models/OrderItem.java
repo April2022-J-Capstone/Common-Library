@@ -36,4 +36,7 @@ public class OrderItem {
     @Column(name = "price")
     private Double price;
 
+    @Column(name = "enabled", columnDefinition = "boolean default true")
+    private boolean enabled;
+
 }

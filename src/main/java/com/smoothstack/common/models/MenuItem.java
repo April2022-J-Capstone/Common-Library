@@ -33,6 +33,9 @@ public class MenuItem {
     @Column(name = "price")
     private Double price;
 
+    @Column(name = "enabled", columnDefinition = "boolean default true")
+    private boolean enabled;
+
     @ManyToMany
     @JoinTable(name = "menu_item_discount",
             joinColumns = @JoinColumn(name = "menu_item_id"),
