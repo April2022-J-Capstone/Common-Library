@@ -30,6 +30,6 @@ public class Review {
     @Column(name = "message", length = 250)
     private String message;
 
-    @Column(name = "enabled", columnDefinition = "boolean default true")
-    private boolean enabled;
+    @Column(name = "enabled")
+    private boolean enabled = true;
 }

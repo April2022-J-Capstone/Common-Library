@@ -55,8 +55,8 @@ public class Order {
     @Column(name = "net_loyalty")
     private Integer netLoyalty;
 
-    @Column(name = "enabled", columnDefinition = "boolean default true")
-    private boolean enabled;
+    @Column(name = "enabled")
+    private boolean enabled = true;
 
     @ManyToMany
     @JoinTable(name = "payment",
