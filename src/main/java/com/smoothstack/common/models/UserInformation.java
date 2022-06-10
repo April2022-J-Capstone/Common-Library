@@ -48,4 +48,8 @@ public class UserInformation {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "communication_type_id")
     private CommunicationMethod communicationType;
+
+    @Column(name = "account_active")
+    private Boolean account_active;
+    
 }
