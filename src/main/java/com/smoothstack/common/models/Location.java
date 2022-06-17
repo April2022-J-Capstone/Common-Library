@@ -36,4 +36,24 @@ public class Location {
 
     @Column(name = "enabled")
     private boolean enabled = true;
+
+    public Boolean compareValues(Location otherLocation) {
+        Boolean same = true;
+        if (this.locationName != otherLocation.getLocationName()) {
+            same = false;
+        }
+        if (this.address != otherLocation.getAddress()) {
+            same = false;
+        }
+        if (this.city != otherLocation.getCity()) {
+            same = false;
+        }
+        if (this.state != otherLocation.getState()) {
+            same = false;
+        }
+        if (this.zipCode != otherLocation.getZipCode()) {
+            same = false;
+        }
+        return same;
+    }
 }

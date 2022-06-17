@@ -10,5 +10,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface LocationRepository extends JpaRepository<Location, Integer> {
-    List<Optional<Location>> findAllByLocationName(String name);
+    Optional<List<Location>> findAllByLocationName(String name);
 }
