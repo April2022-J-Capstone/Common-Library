@@ -16,6 +16,7 @@ import java.time.Instant;
 @Table(name = "active_drivers")
 public class ActiveDriver {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "user_id", nullable = false)
     private Integer id;
 
