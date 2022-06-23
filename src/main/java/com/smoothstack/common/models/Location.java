@@ -40,23 +40,18 @@ public class Location {
     public Boolean compareValues(Location otherLocation) {
         Boolean same = true;
         if (!this.locationName.equals(otherLocation.getLocationName()) ) {
-            System.out.println("Names do not match!");
             same = false;
         }
         if (!this.address.equals(otherLocation.getAddress())) {
-            System.out.println("Address does not match!");
             same = false;
         }
         if (!this.city.equals(otherLocation.getCity())) {
-            System.out.println("Cities do not match!");
             same = false;
         }
         if (!this.state.equals(otherLocation.getState())) {
-            System.out.println("States do not match!");
             same = false;
         }
         if (!this.zipCode.equals(otherLocation.getZipCode())) {
-            System.out.println("Zip Codes do not match!");
             same = false;
         }
         return same;
