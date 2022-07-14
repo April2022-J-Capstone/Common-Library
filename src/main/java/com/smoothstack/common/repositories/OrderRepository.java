@@ -15,5 +15,7 @@ public interface OrderRepository extends JpaRepository<Order, Integer> {
 
     Optional<List<Order>> findAllByDriverId(Integer driverId);
 
+    Optional<Order> findOrderByDriverIdAndId(Integer driverId, Integer orderId);
+
     List<Order> findAllByDriverIsNull();
 }
