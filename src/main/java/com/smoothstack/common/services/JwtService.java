@@ -7,39 +7,31 @@ import com.nimbusds.jose.jwk.source.ImmutableJWKSet;
 import com.nimbusds.jose.jwk.source.JWKSource;
 import com.nimbusds.jose.proc.SecurityContext;
 
-import org.springframework.beans.factory.annotation.Value;
+import com.smoothstack.common.configuration.JwtConfiguration;
 import org.springframework.context.annotation.Profile;
-import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Service;
 import org.springframework.security.oauth2.jwt.JwtDecoder;
 import org.springframework.security.oauth2.jwt.JwtEncoder;
 import org.springframework.security.oauth2.jwt.NimbusJwtDecoder;
 import org.springframework.security.oauth2.jwt.NimbusJwtEncoder;
 
-import java.security.interfaces.RSAPrivateKey;
-import java.security.interfaces.RSAPublicKey;
+import java.io.IOException;
 
 @Service
 @Profile("service")
 public class JwtService {
-    @Value("${jwt.public.key}")
-    RSAPublicKey publicKey;
-
-    @Value("${jwt.private.key}")
-    RSAPrivateKey privateKey;
-
     JwtEncoder encoder;
     JwtDecoder decoder;
 
-    public JwtService() {
+    public JwtService(JwtConfiguration config) throws IOException {
         JWK jwk = new RSAKey
-                .Builder(this.publicKey)
-                .privateKey(this.privateKey)
+                .Builder(config.getPublicKey())
+                .privateKey(config.getPrivateKey())
                 .build();
         JWKSource<SecurityContext> source = new ImmutableJWKSet<>(new JWKSet(jwk));
 
         encoder = new NimbusJwtEncoder(source);
-        decoder = NimbusJwtDecoder.withPublicKey(this.publicKey).build();
+        decoder = NimbusJwtDecoder.withPublicKey(config.getPublicKey()).build();
     }
 
     public JwtEncoder getEncoder() { return encoder; }

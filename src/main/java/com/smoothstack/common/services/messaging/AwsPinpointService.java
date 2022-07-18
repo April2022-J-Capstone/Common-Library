@@ -1,8 +1,7 @@
 package com.smoothstack.common.services.messaging;
 
+import com.smoothstack.common.configuration.AwsPinpointConfiguration;
 import com.smoothstack.common.exceptions.SendMsgFailureException;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import software.amazon.awssdk.auth.credentials.AwsBasicCredentials;
 import software.amazon.awssdk.auth.credentials.StaticCredentialsProvider;
 import software.amazon.awssdk.regions.Region;
@@ -13,33 +12,15 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class AwsPinpointService implements MessagingService {
-    private static final Region DEFAULT_REGION = Region.US_EAST_1;
+    static final Region DEFAULT_REGION = Region.US_EAST_1;
 
-    @Value("${cloud.aws.pinpoint.appId}")
-    private String appId;
-    @Value("${cloud.aws.pinpoint.accessKeyId}")
-    private String accessKeyId;
-    @Value("${cloud.aws.pinpoint.secretKey}")
-    private String secretKey;
+    AwsPinpointConfiguration config;
+    AwsBasicCredentials credentials;
+    PinpointClient client;
 
-    @Value("${cloud.aws.pinpoint.email.from}")
-    private String emailFrom;
-    @Value("${cloud.aws.pinpoint.email.charset}")
-    private String emailCharset;
-
-    @Value("${cloud.aws.pinpoint.sms.from}")
-    private String smsFrom;
-    @Value("${cloud.aws.pinpoint.sms.msgType}")
-    private String smsMsgType;
-    @Value("${cloud.aws.pinpoint.sms.senderId}")
-    private String smsSenderId;
-
-    private AwsBasicCredentials credentials;
-    private PinpointClient client;
-
-    @Autowired
-    public AwsPinpointService() {
-        credentials = AwsBasicCredentials.create(accessKeyId, secretKey);
+    public AwsPinpointService(AwsPinpointConfiguration config) {
+        this.config = config;
+        credentials = AwsBasicCredentials.create(config.getAccessKeyId(), config.getSecretKey());
         client = PinpointClient.builder().region(DEFAULT_REGION)
                 .credentialsProvider(StaticCredentialsProvider.create(credentials))
                 .build();
@@ -55,12 +36,12 @@ public class AwsPinpointService implements MessagingService {
             addressMap.put(email, configuration);
             SimpleEmailPart emailPart = SimpleEmailPart.builder()
                     .data(htmlBody)
-                    .charset(this.emailCharset)
+                    .charset(this.config.getEmailCharset())
                     .build() ;
 
             SimpleEmailPart subjectPart = SimpleEmailPart.builder()
                     .data(subject)
-                    .charset(this.emailCharset)
+                    .charset(this.config.getEmailCharset())
                     .build() ;
 
             SimpleEmail simpleEmail = SimpleEmail.builder()
@@ -70,7 +51,7 @@ public class AwsPinpointService implements MessagingService {
 
             EmailMessage emailMessage = EmailMessage.builder()
                     .body(htmlBody)
-                    .fromAddress(this.emailFrom)
+                    .fromAddress(this.config.getEmailFrom())
                     .simpleEmail(simpleEmail)
                     .build();
 
@@ -84,7 +65,7 @@ public class AwsPinpointService implements MessagingService {
                     .build();
 
             SendMessagesRequest messagesRequest = SendMessagesRequest.builder()
-                    .applicationId(this.appId)
+                    .applicationId(this.config.getAppId())
                     .messageRequest(messageRequest)
                     .build();
 
@@ -108,9 +89,9 @@ public class AwsPinpointService implements MessagingService {
 
             SMSMessage smsMessage = SMSMessage.builder()
                     .body(message)
-                    .messageType(this.smsMsgType)
-                    .originationNumber(this.smsFrom)
-                    .senderId(this.smsSenderId)
+                    .messageType(this.config.getSmsMsgType())
+                    .originationNumber(this.config.getSmsFrom())
+                    .senderId(this.config.getSmsSenderId())
                     .build();
 
             // Create a DirectMessageConfiguration object
@@ -125,7 +106,7 @@ public class AwsPinpointService implements MessagingService {
 
             // create a  SendMessagesRequest object
             SendMessagesRequest request = SendMessagesRequest.builder()
-                    .applicationId(appId)
+                    .applicationId(this.config.getAppId())
                     .messageRequest(msgReq)
                     .build();
 
