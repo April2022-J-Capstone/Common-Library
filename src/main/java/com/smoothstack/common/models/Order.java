@@ -91,6 +91,10 @@ public class Order {
     @OneToMany(mappedBy = "order", cascade = CascadeType.ALL)
     private List<OrderItem> orderItems;
 
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "location_id")
+    private Location location;
+
     public void addRestaurant(Restaurant restaurant) {
         if (restaurants == null)
             restaurants = new ArrayList<>();
