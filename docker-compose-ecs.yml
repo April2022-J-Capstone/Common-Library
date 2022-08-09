@@ -1,0 +1,69 @@
+version: '3'
+services:
+  eureka:
+    image: "${AWS_ID}.dkr.ecr.${AWS_REGION}.amazonaws.com/${EUREKA_IMAGE}:latest"
+    ports:
+      - '8761:8761'
+    environment:
+      - SPRING_PROFILES_ACTIVE=dev
+    env_file:
+      - .env-aws
+  api-gateway:
+    image: "${AWS_ID}.dkr.ecr.${AWS_REGION}.amazonaws.com/${GATEWAY_IMAGE}:latest"
+    ports:
+      - '8080:8080'
+    depends_on:
+      - eureka
+    environment:
+      - SPRING_PROFILES_ACTIVE=dev
+    env_file:
+      - .env-aws
+    x-aws-protocol: http
+  authentication-api:
+    image: "${AWS_ID}.dkr.ecr.${AWS_REGION}.amazonaws.com/${AUTH_IMAGE}:latest"
+    ports:
+      - "8088:8088"
+    depends_on:
+      - eureka
+    environment:
+      - SPRING_PROFILES_ACTIVE=dev
+    env_file:
+      - .env-aws
+  order-api:
+    image: "${AWS_ID}.dkr.ecr.${AWS_REGION}.amazonaws.com/${ORDER_IMAGE}:latest"
+    ports:
+      - "8083:8083"
+    depends_on:
+      - eureka
+    environment:
+      - SPRING_PROFILES_ACTIVE=dev
+    env_file:
+      - .env-aws
+  restaurant-api:
+    image: "${AWS_ID}.dkr.ecr.${AWS_REGION}.amazonaws.com/${RESTAURANT_IMAGE}:latest"
+    ports:
+      - "8082:8082"
+    depends_on:
+      - eureka
+    environment:
+      - SPRING_PROFILES_ACTIVE=dev
+    env_file:
+      - .env-aws
+  user-api:
+    image: "${AWS_ID}.dkr.ecr.${AWS_REGION}.amazonaws.com/${USER_IMAGE}:latest"
+    ports:
+      - "8081:8081"
+    depends_on:
+      - eureka
+    environment:
+      - SPRING_PROFILES_ACTIVE=dev
+    env_file:
+      - .env-aws
+x-aws-cloudformation:
+  Resources:
+    ApigatewayTCP8080Listener:
+      Properties:
+        Port: 80
+    LoadBalancer:
+      Properties:
+        Name: ecsnlb
