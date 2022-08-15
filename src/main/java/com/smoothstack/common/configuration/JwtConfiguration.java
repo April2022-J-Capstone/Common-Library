@@ -5,10 +5,8 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.security.converter.RsaKeyConverters;
 
-import java.io.ByteArrayInputStream;
-import java.io.File;
 import java.io.IOException;
-import java.nio.file.Files;
+import java.io.InputStream;
 import java.security.interfaces.RSAPrivateKey;
 import java.security.interfaces.RSAPublicKey;
 
@@ -26,8 +24,7 @@ public class JwtConfiguration {
         return RsaKeyConverters.pkcs8().convert(loadClassPathResource(this.key));
     }
 
-    private ByteArrayInputStream loadClassPathResource(String path) throws IOException {
-        File file = new ClassPathResource(path).getFile();
-        return new ByteArrayInputStream(Files.readAllBytes(file.toPath()));
+    private InputStream loadClassPathResource(String path) throws IOException {
+        return new ClassPathResource(path).getInputStream();
     }
 }
