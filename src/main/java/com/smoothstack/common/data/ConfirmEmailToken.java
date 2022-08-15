@@ -38,6 +38,6 @@ public class ConfirmEmailToken implements JwtParseable<ConfirmEmailToken> {
                 .build();
 
         JwtEncoderParameters params = JwtEncoderParameters.from(claims);
-        return encoder.encode(params).toString();
+        return encoder.encode(params).getTokenValue();
     }
 }

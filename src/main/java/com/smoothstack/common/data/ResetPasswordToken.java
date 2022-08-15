@@ -40,6 +40,6 @@ public class ResetPasswordToken implements JwtParseable<ResetPasswordToken> {
                 .build();
 
         JwtEncoderParameters params = JwtEncoderParameters.from(claims);
-        return encoder.encode(params).toString();
+        return encoder.encode(params).getTokenValue();
     }
 }
