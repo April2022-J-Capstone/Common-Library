@@ -12,4 +12,8 @@ import java.util.Optional;
 public interface RestaurantRepository extends JpaRepository<Restaurant, Integer>, JpaSpecificationExecutor<Restaurant> {
     // Useful only for testing as there can be multiple restaurants under the same name
     Optional<Restaurant> findTopByName(String name);
+
+    Optional<Restaurant> findByOwner_userName(String username);
+
+
 }
