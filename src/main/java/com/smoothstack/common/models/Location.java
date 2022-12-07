@@ -25,6 +25,9 @@ public class Location {
     @Column(name = "address", length = 45)
     private String address;
 
+//    @Column(name = "address", length = 45)
+//    private String address2;
+
     @Column(name = "city", length = 45)
     private String city;
 

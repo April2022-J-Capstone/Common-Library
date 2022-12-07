@@ -18,4 +18,6 @@ public interface OrderRepository extends JpaRepository<Order, Integer> {
     Optional<Order> findOrderByDriverIdAndId(Integer driverId, Integer orderId);
 
     List<Order> findAllByDriverIsNull();
+
+    List<Order> findAllByRestaurants_Id(Integer restaurantId);
 }

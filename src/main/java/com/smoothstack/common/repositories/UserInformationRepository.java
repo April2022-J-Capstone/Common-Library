@@ -9,4 +9,5 @@ import java.util.Optional;
 @Repository
 public interface UserInformationRepository extends JpaRepository<UserInformation, Integer> {
     Optional<UserInformation> findTopByEmail(String email);
+    Boolean existsByEmail(String email);
 }

@@ -5,6 +5,7 @@ import lombok.*;
 
 import javax.persistence.*;
 import java.sql.Date;
+import java.time.LocalDate;
 
 @Getter
 @Setter
@@ -37,7 +38,7 @@ public class UserInformation {
     private String phoneNumber;
 
     @Column(name = "birthdate")
-    private Date birthdate;
+    private LocalDate birthdate;
 
     @Column(name = "veteran_status")
     private Boolean veteranStatus;

@@ -20,7 +20,7 @@ public class Discount {
     @Column(name = "id", nullable = false)
     private Integer id;
 
-    @Column(name = "name", length = 45)
+    @Column(name = "name", length = 45, nullable = false)
     private String name;
 
     @Column(name = "amount")
@@ -29,7 +29,7 @@ public class Discount {
     @Column(name = "percent")
     private Integer percent;
 
-    @Column(name = "discount_start")
+    @Column(name = "discount_start", nullable = false)
     private LocalDateTime discountStart;
 
     @Column(name = "discount_end")

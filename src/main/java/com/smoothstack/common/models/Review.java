@@ -20,6 +20,10 @@ public class Review {
     @Column(name = "id", nullable = false)
     private Integer id;
 
+    @ManyToOne
+    @JoinColumn(name="user_id", nullable = false)
+    private User user;
+
     @Convert(disableConversion = true)
     @Column(name = "time_created")
     private LocalDateTime timeCreated;

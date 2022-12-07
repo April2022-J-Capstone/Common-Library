@@ -16,6 +16,7 @@ import org.springframework.stereotype.Service;
 import javax.transaction.Transactional;
 import java.sql.Date;
 import java.time.Instant;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -457,7 +458,7 @@ public class CommonLibraryTestingService {
         userInformation.setLastName("Schroeder");
         userInformation.setEmail("ben-email");
         userInformation.setPhoneNumber("ben-phone-number");
-        userInformation.setBirthdate(Date.valueOf("2000-04-01"));
+        userInformation.setBirthdate(LocalDate.of(2000,4,1));
         userInformation.setVeteranStatus(false);
         userInformation.setEmailConfirmed(true);
 
@@ -480,7 +481,7 @@ public class CommonLibraryTestingService {
         userInformation.setLastName("Van Dyke");
         userInformation.setEmail("per-email");
         userInformation.setPhoneNumber("per-phone-number");
-        userInformation.setBirthdate(Date.valueOf("1950-04-20"));
+        userInformation.setBirthdate(LocalDate.of(1950, 4,20));
         userInformation.setVeteranStatus(true);
         userInformation.setEmailConfirmed(true);
 
@@ -507,7 +508,7 @@ public class CommonLibraryTestingService {
         userInformation.setLastName("Printice");
         userInformation.setEmail("roxanne-email");
         userInformation.setPhoneNumber("roxanne-phone-number");
-        userInformation.setBirthdate(Date.valueOf("2000-01-01"));
+        userInformation.setBirthdate(LocalDate.of(2000,1,1));
         userInformation.setVeteranStatus(false);
         userInformation.setEmailConfirmed(true);
 
@@ -528,7 +529,7 @@ public class CommonLibraryTestingService {
         userInformation.setLastName("Sauceda");
         userInformation.setEmail("marcus-email");
         userInformation.setPhoneNumber("marcus-phone-number");
-        userInformation.setBirthdate(Date.valueOf("2000-01-01"));
+        userInformation.setBirthdate(LocalDate.of(2000,1,1));
         userInformation.setVeteranStatus(false);
         userInformation.setEmailConfirmed(false);
 
